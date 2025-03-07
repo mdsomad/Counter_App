@@ -3,9 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:tsv_count_app/Provider/Home_Screen_Provider.dart';
-import 'package:tsv_count_app/Screens/home.dart';
+import 'package:tsv_count_app/Screens/Home_Screen.dart';
 import 'package:tsv_count_app/models/counter_model.dart';
 
 void main() async {
@@ -48,26 +46,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<HomeScreenProvider>(
-            create: (context) => HomeScreenProvider()),
-      ],
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Tsv Count App',
-          themeMode: ThemeMode.dark,
-          theme: ThemeData(
-            scaffoldBackgroundColor: Color(0xff1A1717),
-            // This works for code too, not just values: Most code changes can be
-            // tested with just a hot reload.
-            // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            // useMaterial3: true,
-            // appBarTheme: AppBarTheme(
-            //   backgroundColor: Color(0xff1A1717),
-            // ),
-          ),
-          home: Home()),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Tsv Count App',
+        themeMode: ThemeMode.dark,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Color(0xff1A1717),
+          // This works for code too, not just values: Most code changes can be
+          // tested with just a hot reload.
+          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          // useMaterial3: true,
+          // appBarTheme: AppBarTheme(
+          //   backgroundColor: Color(0xff1A1717),
+          // ),
+        ),
+        home: HomeScreen());
   }
 }
