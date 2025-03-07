@@ -1,4 +1,4 @@
-# tsv_count_app
+# Counter App
 
 A new Flutter project.
 
