@@ -1,20 +1,38 @@
 # Counter App
 
-A new Flutter project.
+## Counter App Ui Preview
 
-## Getting Started
+<table>
+  
+<tr>
 
-This project is a starting point for a Flutter application.
+<td>
+  <img src="" width="260"/>
+</td>
 
-A few resources to get you started if this is your first Flutter project:
+<td>
+  <img src="" width="260"/>
+</td>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<td>
+  <img src="" width="260"/>
+</td>
+<td>
+  <img src="" width="260"/>
+</td>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+</tr>
+
+</table>
 
 ```sh
 dart run build_runner build
+```
+
+```sh
+flutter clean
+```
+
+```sh
+ flutter build apk --release
 ```

@@ -48,13 +48,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Tsv Count App',
+        title: 'Counter',
         themeMode: ThemeMode.dark,
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xff1A1717),
+
           // This works for code too, not just values: Most code changes can be
           // tested with just a hot reload.
-          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+
           // useMaterial3: true,
           // appBarTheme: AppBarTheme(
           //   backgroundColor: Color(0xff1A1717),

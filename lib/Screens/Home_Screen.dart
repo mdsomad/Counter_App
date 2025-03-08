@@ -4,7 +4,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:tsv_count_app/Boxes/boxes.dart';
 import 'package:tsv_count_app/Screens/Widgets/button.dart';
-import 'package:tsv_count_app/Screens/Widgets/description_widget.dart';
 import 'package:tsv_count_app/models/counter_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,6 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   //TODO Create updateCounter Function
   void updateCounterFuntcion(CounterModel counterModel) async {
+    log("Update Function Called");
+
     if (selectedLocation == "None") {
       counterModel.counter_range_value = 0;
     } else {
@@ -82,11 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
     if (counterModel.counter_range_value != 0 &&
         counterModel.counter_value == counterModel.counter_range_value) {
       counterModel.isEdited_now = true;
-      counterModel.counter_value = 0;
+      counterModel.counter_value = 1;
+      counterModel.dateadded = DateTime.now();
       await counterModel.save();
     } else {
       counterModel.isEdited_now = true;
       counterModel.counter_value = counterModel.counter_value + 1;
+      counterModel.dateadded = DateTime.now();
       await counterModel.save();
     }
   }
@@ -94,12 +97,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void decrementCounter(CounterModel counterModel) async {
     counterModel.isEdited_now = true;
     counterModel.counter_value = counterModel.counter_value - 1;
+    counterModel.dateadded = DateTime.now();
     await counterModel.save();
   }
 
   void clearCounter(CounterModel counterModel) async {
     counterModel.isEdited_now = true;
     counterModel.counter_value = 0;
+    counterModel.dateadded = DateTime.now();
     await counterModel.save();
   }
 
@@ -156,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               top: screenHeight * 0.015,
                               bottom:
                                   counteDataList[index] == counteDataList.last
-                                      ? screenHeight * 0.09
+                                      ? screenHeight * 0.10
                                       : 0),
                           child: GestureDetector(
                             onLongPress: () {
@@ -258,21 +263,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 )
                                               : SizedBox()),
                                   Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: screenWidth * 0.03),
-                                      child: DescriptionTextShowWidget(
-                                          text:
-                                              counteDataList[index].description)
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: screenWidth * 0.03),
+                                    child:
+                                        //  DescriptionTextShowWidget(
+                                        //     text:
+                                        //         counteDataList[index].description)
 
-                                      // Text(
-                                      //   "Somad Amir Hello okmkos dmjnds nijsnd ijknsdjnsjdn",
-                                      //   style: TextStyle(
-                                      //       letterSpacing: 2,
-                                      //       color: Colors.white,
-                                      //       fontSize: 23,
-                                      //       fontWeight: FontWeight.w500),
-                                      // ),
-                                      ),
+                                        Text(
+                                      // "A paragraph is a series of sentences that are organized and coherent, and are all related to a single topic. Almost every piece of writing you do that is longer than a few sentences should be organized into paragraphs. This is because paragraphs show a reader where the subdivisions of an essay begin and end, and thus help the reader see the organization of the essay and grasp its main points."
+                                      counteDataList[index].description,
+                                      textAlign: TextAlign.left,
+                                      maxLines: 5,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          letterSpacing: 2,
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12, vertical: 3),
@@ -394,6 +404,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
         selectedLocation = 'Set Counter Range';
       }
+    } else {
+      selectedLocation = 'None';
+      descriptionController.clear();
+      setCounterRangeController.clear();
     }
 
     return showDialog(
@@ -490,6 +504,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (isEditDialog) {
                       updateCounterFuntcion(counterModel);
                     } else {
+                      selectedLocation = 'None';
+                      descriptionController.clear();
+                      setCounterRangeController.clear();
                       addCounterFuntcion();
                     }
                     Navigator.pop(context);
